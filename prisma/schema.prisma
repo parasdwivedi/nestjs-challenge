@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+//We define User, Projects and Tasks Schema here
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email String @unique
+  hash String
+  firstName String
+  lastName String
+  projects Project[]
+
+  @@map("users")
+}
+
+model Project{
+  id Int @id @default(autoincrement())
+  name String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  description String
+  tasks Task[]
+
+  //Project is connected to user
+
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("projects")
+}
+
+model Task{
+  id Int @id @default(autoincrement())
+  name String
+  description String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //Task is connected to project
+
+  projectId Int    
+  project Project @relation(fields: [projectId], references: [id])    
+
+  @@map("tasks")
+}
