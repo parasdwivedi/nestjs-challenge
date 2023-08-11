@@ -78,6 +78,31 @@ $ npx dotenv -e .env.test  prisma studio
 
 ```
 
+## Possible functionalities
+
+```bash
+
+# create user / sign up
+/auth/signup
+
+# sign in
+/auth/signin
+
+# get user
+/users
+
+# get user
+/users
+
+# CRUD operations on projects
+/projects
+/projects/:project_id
+
+# CRUD operations on tasks
+/projects/:project_id/tasks
+/projects/:project_id/tasks/:tasks_id
+```
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
